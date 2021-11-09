@@ -43,6 +43,7 @@ public class Verlet : MonoBehaviour
 
     public void Simulate()
 	{
+		// logic provided by https://www.youtube.com/watch?v=PGk0rnyTa1U
 		foreach (Point p in points)
 		{
 			if (!p.locked)
