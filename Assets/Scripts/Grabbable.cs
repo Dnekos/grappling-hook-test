@@ -5,7 +5,7 @@ using UnityEngine;
 public class Grabbable : MonoBehaviour
 {
 	//public Transform grabbed;
-	[SerializeField] protected float PullForce = 0f;
+	[Header("Grabbable Properties"), SerializeField] protected float PullForce = 0f;
 	[SerializeField] protected float lift = 3;
 
 	public bool Grabbed = false;
@@ -18,9 +18,9 @@ public class Grabbable : MonoBehaviour
 	}
 	public PullTarget PullPlayer = PullTarget.Self;
 
-	public Rigidbody rb;
+	[HideInInspector] public Rigidbody rb;
 
-	private void Start()
+	protected virtual void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 	}

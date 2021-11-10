@@ -5,36 +5,41 @@ using UnityEngine.InputSystem;
 
 public class Gun : Grabbable
 {
-	[Header("Fire Speeds and clip"), SerializeField]
-	protected float clipSize;
-	[SerializeField]
-	protected float FireRate = .5f;
 
-	[Header("Damage"), SerializeField]
+	[Header("Damage per Second"), SerializeField]
 	protected float BulletDamage = 3;
 	[SerializeField]
 	protected float PelletAmount;
+	[SerializeField]
+	protected float FireRate = .5f;
 
 	[Header("Trajectory"), SerializeField]
 	protected float spread = 5f;
 	[SerializeField]
 	protected float bulletForce = 5f;
+
 	/*[Header("RocketSpecific"), SerializeField]
 	protected bool launcher;
 	[SerializeField]
 	protected float splash;
 	*/
+
+	[Header("Player Specific values"),Tooltip("Where the gun sits when parented by the player")]
+	public Vector3 HeldPos;
+	[Header("Fire Speeds and clip"), SerializeField]
+	protected float clipSize;
+	[SerializeField, Tooltip("How far the gun is thrown")] float ThrowForce;
+	[SerializeField, Tooltip("How much the gun spins when thrown")] Vector3 AngularThrowForce;
+
 	[SerializeField, Header("Projectile Components")]
 	public Transform firePoint;
 	[SerializeField]
 	GameObject bulletPrefab;
 
 	private bool canShoot = true;
-	protected float currentClip;
+	protected float RemainingAmmo;
 
-	[Header("Held values")]
-	public Vector3 HeldPos;
-
+	#region Grabbing and held functions
 	public override void Pull(Transform puller, HookManager hook)
 	{
 		Debug.Log("Override");
@@ -44,6 +49,22 @@ public class Gun : Grabbable
 		GetComponent<Rigidbody>().isKinematic = true;
 	}
 
+	/// <summary>
+	/// become a child of and go to predetermined position of 'hand'
+	/// </summary>
+	public void Stick(Transform hand)
+	{
+		transform.SetParent(hand);
+		transform.localPosition = HeldPos;
+		transform.localRotation = Quaternion.Euler(Vector3.zero);
+	}
+	public void Throw()
+	{
+		transform.SetParent(null);
+		GetComponent<Rigidbody>().isKinematic = false;
+		GetComponent<Rigidbody>().AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
+	}
+	#endregion
 
 	IEnumerator CanShoot()
 	{
@@ -53,9 +74,10 @@ public class Gun : Grabbable
 		canShoot = true;
 	}
 
-	virtual protected void Start()
+	protected override void Start()
 	{
-		currentClip = clipSize;
+		base.Start();
+		RemainingAmmo = clipSize;
 	}
 
 	/// <summary>
@@ -65,23 +87,22 @@ public class Gun : Grabbable
 	public bool ShootProjectile(bool decrementAmmo = false)
 	{
 		// has issue where these are ran by non active objects (https://forum.unity.com/threads/playerinput-prefab-calls-action-events-when-using-player-input-manager.1120189/)
-		if (!canShoot || !gameObject.activeInHierarchy || currentClip <= 0)
+		if (!canShoot || !gameObject.activeInHierarchy || RemainingAmmo <= 0)
 			return false;
 
 		if (decrementAmmo)
-			currentClip--;
+			RemainingAmmo--;
 
 
 		// create bullet
 		for (int index = 0; index < PelletAmount; index++)
 		{
-			//Quaternion newRot = (firePoint.lossyScale.y < 0) ? firePoint.rotation * Quaternion.Euler(0, 0, 180) : firePoint.rotation;
 			Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
-			bullet.transform.eulerAngles = new Vector3(bullet.transform.eulerAngles.x + Random.Range(-spread, spread), bullet.transform.eulerAngles.y + Random.Range(-spread, spread), bullet.transform.eulerAngles.z + Random.Range(-spread, spread));
+			
+			bullet.transform.eulerAngles += 
+				new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread)); // apply spread
 			bullet.Damage = BulletDamage;
-			//bullet.gameObject.SetActive(true);
-			bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletForce,ForceMode.Impulse);
-
+			bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletForce, ForceMode.Impulse); // shoot the bullet
 		}
 			
 		StartCoroutine(CanShoot());

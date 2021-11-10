@@ -77,8 +77,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrower: {fileID: 0}
-  player: {fileID: 0}
+  ThrowForce: 10
   GrabbedWeapon: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!1 &6692626149991471669
 GameObject:
   m_ObjectHideFlags: 0
