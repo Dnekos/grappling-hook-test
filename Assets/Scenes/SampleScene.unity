@@ -4396,10 +4396,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1445642193788703891, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
-      propertyPath: Sensitivity
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 1445642193788703892, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4455,10 +4451,6 @@ PrefabInstance:
     - target: {fileID: 1445642193788703897, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1445642193788703899, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
-      propertyPath: OnlyMaxDist
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1445642193788703900, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}

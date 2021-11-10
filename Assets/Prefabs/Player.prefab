@@ -1768,15 +1768,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numIterations: 20
   chainState: 0
-  maxdistance: 50
+  fundoScript: {fileID: 0}
   chain: {fileID: 1445642193727966419}
-  fundo: {fileID: 1445642192255917395}
-  ThrowForce: 20
   returnSpeed: 15
   MinReturnDist: 0.2
   playerjoint: {fileID: 1445642193788703899}
   jointDistMultiplier: 1.1
-  HeldWeapon: {fileID: 0}
+  grabbedObj: {fileID: 0}
+  OnlyPullWhenTaut: 0
 --- !u!1 &1445642191888402173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,7 +1954,6 @@ GameObject:
   - component: {fileID: 1445642193788703898}
   - component: {fileID: 1445642193788703892}
   - component: {fileID: 1445642193788703899}
-  - component: {fileID: 1445642193788703900}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -2072,7 +2070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 508563434a9d9b34aadeb132e6490bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sensitivity: 75
+  Sensitivity: 40
   head: {fileID: 1445642191998212548}
 --- !u!114 &1445642193788703898
 MonoBehaviour:
@@ -2192,7 +2190,7 @@ MonoBehaviour:
     m_ActionName: Game/Jump[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1445642193788703900}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PullManager, Assembly-CSharp
         m_MethodName: OnPull
         m_Mode: 0
@@ -2230,24 +2228,7 @@ MonoBehaviour:
   Distance: 0
   spring: 0.1
   damper: 5
-  OnlyMaxDist: 0
---- !u!114 &1445642193788703900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445642193788703890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6684557ae1ae73a429699ed1ba7b7f13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabbedObj: {fileID: 0}
-  lift: 3
-  fundo: {fileID: 1445642192255917393}
-  thrower: {fileID: 1445642191777324792}
-  OnlyPullWhenTaut: 0
+  OnlyMaxDist: 1
 --- !u!1 &1507004807671988822
 GameObject:
   m_ObjectHideFlags: 0
@@ -11932,7 +11913,7 @@ PrefabInstance:
     - target: {fileID: 6692626149754814079, guid: b191468cd053e804fb7da5570d6213bd, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1445642193788703900}
+      objectReference: {fileID: 0}
     - target: {fileID: 6692626149754814079, guid: b191468cd053e804fb7da5570d6213bd, type: 3}
       propertyPath: thrower
       value: 
@@ -11944,17 +11925,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6692626149754814077, guid: b191468cd053e804fb7da5570d6213bd, type: 3}
   m_PrefabInstance: {fileID: 5255436797308773166}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1445642192255917393 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6692626149754814079, guid: b191468cd053e804fb7da5570d6213bd, type: 3}
-  m_PrefabInstance: {fileID: 5255436797308773166}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6db691e8b1b13ad4d923ef5ef3690007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!120 &1445642193727966419 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 6692626150153515005, guid: b191468cd053e804fb7da5570d6213bd, type: 3}
