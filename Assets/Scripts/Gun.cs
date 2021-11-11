@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Gun : Grabbable
 {
@@ -26,6 +25,9 @@ public class Gun : Grabbable
 
 	[Header("Player Specific values"),Tooltip("Where the gun sits when parented by the player")]
 	public Vector3 HeldPos;
+	[Header("Enemy Specific")]
+	public Vector3 EnemyHeldPos;
+
 	[Header("Fire Speeds and clip"), SerializeField]
 	protected float clipSize;
 	[SerializeField, Tooltip("How far the gun is thrown")] float ThrowForce;
@@ -38,15 +40,27 @@ public class Gun : Grabbable
 
 	private bool canShoot = true;
 	protected float RemainingAmmo;
+	public BoxCollider col;
+
+
+	protected override void Start()
+	{
+		base.Start();
+		RemainingAmmo = clipSize;
+		col = GetComponent<BoxCollider>();
+	}
 
 	#region Grabbing and held functions
 	public override void Pull(Transform puller, HookManager hook)
 	{
-		Debug.Log("Override");
+		// disable physics
 		transform.SetParent(hook.transform);
+		rb.isKinematic = true;
+		col.enabled = false;
+
 		hook.GrabbedWeapon = this;
-		FindObjectOfType<Verlet>().ReturnToHand();
-		GetComponent<Rigidbody>().isKinematic = true;
+		hook.thrower.ReturnToHand();
+
 	}
 
 	/// <summary>
@@ -60,9 +74,14 @@ public class Gun : Grabbable
 	}
 	public void Throw()
 	{
+		// enable physics
 		transform.SetParent(null);
-		GetComponent<Rigidbody>().isKinematic = false;
-		GetComponent<Rigidbody>().AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
+		rb.isKinematic = false;
+		col.enabled = true;
+
+		rb.AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
+		rb.AddRelativeTorque(AngularThrowForce, ForceMode.Impulse);
+
 	}
 	#endregion
 
@@ -74,11 +93,6 @@ public class Gun : Grabbable
 		canShoot = true;
 	}
 
-	protected override void Start()
-	{
-		base.Start();
-		RemainingAmmo = clipSize;
-	}
 
 	/// <summary>
 	/// Check if user can fire a projectile, then fire a projectile

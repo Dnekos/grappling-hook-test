@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GrabbablePoint
+  - Melee
   layers:
   - Default
   - TransparentFX

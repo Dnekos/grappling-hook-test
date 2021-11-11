@@ -123,9 +123,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7929144463352982837}
+  - component: {fileID: 6351771885063936570}
   - component: {fileID: 1875049916227290225}
   - component: {fileID: 316552732768026659}
-  - component: {fileID: 6351771885063936570}
   m_Layer: 10
   m_Name: Shotgun
   m_TagString: Untagged
@@ -149,6 +149,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!65 &6351771885063936570
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7296440859117533071}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.10527176, y: 0.3399206, z: 2.004733}
+  m_Center: {x: 0.085598946, y: 0.0046990663, z: -0.17289019}
 --- !u!65 &1875049916227290225
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179,25 +192,14 @@ MonoBehaviour:
   Grabbed: 0
   PullPlayer: 0
   rb: {fileID: 0}
-  clipSize: 4
-  FireRate: 1
   BulletDamage: 3
   PelletAmount: 5
+  FireRate: 1
   spread: 5
   bulletForce: 2.5
+  HeldPos: {x: 0.3, y: 0, z: 0}
+  clipSize: 4
+  ThrowForce: 0
+  AngularThrowForce: {x: 0, y: 0, z: 0}
   firePoint: {fileID: 2849874212201678325}
   bulletPrefab: {fileID: 3790956226430311722, guid: 2a9059f68b2d8694886a43cdb14c261f, type: 3}
-  HeldPos: {x: 0.3, y: 0, z: 0}
---- !u!65 &6351771885063936570
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7296440859117533071}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.10527176, y: 0.3399206, z: 2.004733}
-  m_Center: {x: 0.085598946, y: 0.0046990663, z: -0.17289019}

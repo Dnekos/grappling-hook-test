@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HookManager : MonoBehaviour
 {
-	[SerializeField] Verlet thrower;
+	[SerializeField] public Verlet thrower;
 	[SerializeField] float ThrowForce = 5;
 
 	public Gun GrabbedWeapon;
@@ -47,13 +47,16 @@ public class HookManager : MonoBehaviour
 
 		transform.SetParent(obj);
 	}
-	public void Throw(Transform hand)
+	public void Unstick()
 	{
 		transform.SetParent(null);
 
 		rb.isKinematic = false;
 		col.enabled = true;
-
+	}
+	public void Throw(Transform hand)
+	{
+		Unstick();
 		rb.AddForce(hand.forward * ThrowForce, ForceMode.Impulse);
 	}
 }
