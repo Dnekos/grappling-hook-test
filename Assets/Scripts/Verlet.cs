@@ -177,10 +177,13 @@ public class Verlet : MonoBehaviour
 		}
 		else // else, pull on tethered object
 		{
-			if ((OnlyPullWhenTaut && !playerjoint.Taut) || grabbedObj == null)
+			if (OnlyPullWhenTaut && !playerjoint.Taut)
 				return;
-			Debug.Log("pulled");
-			grabbedObj.Pull(playerjoint.transform, fundoScript);
+			//Debug.Log(grabbedObj + " "+ grabbedObj.gameObject);
+			if (grabbedObj == null)
+				playerjoint.PullPlayer();
+			else
+				grabbedObj.Pull(playerjoint.transform, fundoScript);
 		}
 	}
 

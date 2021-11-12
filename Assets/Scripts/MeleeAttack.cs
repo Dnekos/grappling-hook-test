@@ -26,7 +26,6 @@ public class MeleeAttack : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		Debug.Log(other.gameObject +" "+ (other.gameObject.layer == LayerMask.GetMask("Enemies")));
 		HealthManager health = other.GetComponent<HealthManager>();
 		if (other.isTrigger || !health)
 			return;

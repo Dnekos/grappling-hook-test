@@ -1080,6 +1080,7 @@ GameObject:
   - component: {fileID: 556630699}
   - component: {fileID: 556630698}
   - component: {fileID: 556630697}
+  - component: {fileID: 556630701}
   m_Layer: 6
   m_Name: Cube (1)
   m_TagString: GrabbablePoint
@@ -1164,6 +1165,23 @@ Transform:
   m_Father: {fileID: 1059890951}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556630701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556630696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233a2abed9008a145a4d97b816244d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PullForce: 20
+  lift: 7
+  Grabbed: 0
+  target: 1
+  rb: {fileID: 0}
 --- !u!1 &585257321
 GameObject:
   m_ObjectHideFlags: 0
@@ -4388,6 +4406,10 @@ PrefabInstance:
       propertyPath: fundoScript
       value: 
       objectReference: {fileID: 713877985}
+    - target: {fileID: 1445642191777324792, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
+      propertyPath: OnlyPullWhenTaut
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1445642192255917395, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -4495,6 +4517,10 @@ PrefabInstance:
     - target: {fileID: 1445642193788703897, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445642193788703899, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
+      propertyPath: DefaultForce
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3102917014899756028, guid: 37d7b0763e7aa8c4e9d6087e24ca5ccf, type: 3}
       propertyPath: m_LocalScale.x

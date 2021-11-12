@@ -16,19 +16,29 @@ public class Grabbable : MonoBehaviour
 		Player,
 		Equip
 	}
-	public PullTarget PullPlayer = PullTarget.Self;
+	public PullTarget target = PullTarget.Self;
 
 	[HideInInspector] public Rigidbody rb;
 
 	protected virtual void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		if (rb == null)
+			target = PullTarget.Player;
 	}
 
 	public virtual void Pull(Transform puller, HookManager hook)
 	{
 		Vector3 dirToPlayer = (transform.position - puller.position).normalized;
-		Vector3 pullDir = Vector3.Reflect(puller.forward, Vector3.Cross(dirToPlayer, Vector3.up)).normalized;
-		rb.AddForce(-pullDir * PullForce + Vector3.up * lift, ForceMode.Impulse);
+
+		if (target == PullTarget.Self)
+		{
+			Vector3 pullDir = Vector3.Reflect(puller.forward, Vector3.Cross(dirToPlayer, Vector3.up)).normalized;
+			rb.AddForce(-pullDir * PullForce + Vector3.up * lift, ForceMode.Impulse);
+		}
+		else
+		{
+			puller.GetComponent<Rigidbody>().AddForce(dirToPlayer * PullForce + Vector3.up * lift, ForceMode.Impulse);
+		}
 	}
 }

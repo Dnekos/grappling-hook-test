@@ -32,6 +32,7 @@ public class HookManager : MonoBehaviour
 
 		// check for grabbable points for pull
 		Grabbable grabbed = collision.gameObject.GetComponent<Grabbable>();
+		Debug.Log(grabbed +" "+ (grabbed != null));
 		if (grabbed != null)
 		{
 			thrower.grabbedObj = grabbed;
