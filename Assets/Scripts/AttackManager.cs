@@ -8,6 +8,11 @@ public class AttackManager : MonoBehaviour
 	Animator anim;
 	[SerializeField] GameObject col;
 	[SerializeField] Transform HitboxSpawn;
+
+	[Header("Offsets"), SerializeField]
+	Vector3 PosOffset;
+	[SerializeField]
+	Quaternion RotOffset;
 	// Start is called before the first frame update
 	void Start()
     {

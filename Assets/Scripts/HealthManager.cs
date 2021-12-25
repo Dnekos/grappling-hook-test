@@ -13,15 +13,18 @@ public class HealthManager : MonoBehaviour
 			Debug.Log("hit");
 	}
 	
-	public void GetHit(float damage)
+	public void GetHit(float damage, bool shouldDestroy = true)
 	{
 		Health -= damage;
 		if (Health <= 0)
 		{
 			if (!isPlayer)
 			{
-				GetComponentInChildren<HookManager>().Unstick(); // make sure we take off the hook
-				Destroy(gameObject);
+				HookManager hook = GetComponentInChildren<HookManager>();
+				if (hook != null)
+					hook.Unstick(); // make sure we take off the hook
+				if (shouldDestroy)
+					Destroy(gameObject);
 			}
 		}
 		Debug.Log(gameObject + "got hit for " + damage + " damage");

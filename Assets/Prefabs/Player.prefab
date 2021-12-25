@@ -1768,7 +1768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numIterations: 20
   chainState: 0
-  fundoScript: {fileID: 0}
+  fundoScript: {fileID: 1445642192255917393}
   chain: {fileID: 1445642193727966419}
   returnSpeed: 15
   MinReturnDist: 0.2
@@ -2230,8 +2230,9 @@ MonoBehaviour:
   OnlyMaxDist: 1
   Taut: 0
   TautMargin: 0.9
-  DefaultLift: 3
-  DefaultForce: 2
+  DefaultLift: 15
+  DefaultForce: 7.5
+  verlet: {fileID: 1445642191777324792}
 --- !u!1 &1507004807671988822
 GameObject:
   m_ObjectHideFlags: 0
@@ -11995,3 +11996,14 @@ LineRenderer:
   m_CorrespondingSourceObject: {fileID: 6692626150153515005, guid: b191468cd053e804fb7da5570d6213bd, type: 3}
   m_PrefabInstance: {fileID: 5255436797308773166}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1445642192255917393 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6692626149754814079, guid: b191468cd053e804fb7da5570d6213bd, type: 3}
+  m_PrefabInstance: {fileID: 5255436797308773166}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db691e8b1b13ad4d923ef5ef3690007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

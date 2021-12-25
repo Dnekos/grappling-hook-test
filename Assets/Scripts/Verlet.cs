@@ -175,7 +175,7 @@ public class Verlet : MonoBehaviour
 		{
 			HeldWeapon.ShootProjectile(true);
 		}
-		else // else, pull on tethered object
+		else if (chainState != ChainState.Away) // else the ball has been thrown, pull on tethered object
 		{
 			if (OnlyPullWhenTaut && !playerjoint.Taut)
 				return;
@@ -191,6 +191,8 @@ public class Verlet : MonoBehaviour
 	{
 		if (!gameObject.activeInHierarchy || !context.performed) // prevents double throws
 			return;
+
+		grabbedObj = null;
 
 		// small state machine
 		if (HeldWeapon) // if holding a weapon...

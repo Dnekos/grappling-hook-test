@@ -9,7 +9,6 @@ public class HookManager : MonoBehaviour
 
 	public Gun GrabbedWeapon;
 
-
 	[HideInInspector] public Rigidbody rb;
 	SphereCollider col;
 	private void Start()

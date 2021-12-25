@@ -54,6 +54,7 @@ public class Gun : Grabbable
 	public override void Pull(Transform puller, HookManager hook)
 	{
 		// disable physics
+		hook.transform.SetParent(null);
 		transform.SetParent(hook.transform);
 		rb.isKinematic = true;
 		col.enabled = false;

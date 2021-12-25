@@ -112,3 +112,4 @@ MonoBehaviour:
   TargetEnemy: 1
   Lifetime: 1
   Damage: 1
+  _forceAppliedToCut: 6

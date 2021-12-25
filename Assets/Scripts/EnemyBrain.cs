@@ -92,6 +92,9 @@ public class EnemyBrain : MonoBehaviour
     }
 	void DetachGun()
 	{
+		if (HeldWeapon == null)
+			return;
+
 		HeldWeapon.rb.isKinematic = false;
 		HeldWeapon.transform.SetParent(null);
 		HeldWeapon = null;

@@ -7,7 +7,8 @@ public class Grabbable : MonoBehaviour
 	//public Transform grabbed;
 	[Header("Grabbable Properties"), SerializeField] protected float PullForce = 0f;
 	[SerializeField] protected float lift = 3;
-
+	[Tooltip("percent of Joint force applies to the player, rather than the grabbed object")] public float DragCoefficient = 1;
+	
 	public bool Grabbed = false;
 
 	public enum PullTarget
