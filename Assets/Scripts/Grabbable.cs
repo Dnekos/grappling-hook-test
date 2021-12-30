@@ -12,6 +12,9 @@ public class Grabbable : MonoBehaviour
 	public bool Grabbed = false;
 	AutoReticle targeting;
 
+	[Header("Thrown Damage"), SerializeField,Tooltip("Minimum speed to be able to damage an object")] float MinSpeedForDamage = 5;
+	[SerializeField, Tooltip("Damage is calculated as velocity / divisor")] float DamageDivisor = 4;
+
 	public enum PullTarget
 	{
 		Self,
@@ -37,7 +40,7 @@ public class Grabbable : MonoBehaviour
 
 		if (target == PullTarget.Self)
 		{
-			if (targeting.enemy != null) // auto targeting to enemy
+			if (targeting.enemy != null && targeting.enemy != transform) // if autotargeting is active and not directed at the self
 			{
 				// set up basic variables
 				Vector3 enemyPos = targeting.enemy.position;
@@ -65,10 +68,39 @@ public class Grabbable : MonoBehaviour
 				Vector3 pullDir = Vector3.Reflect(puller.forward, Vector3.Cross(dirToPlayer, Vector3.up)).normalized;
 				rb.AddForce(-pullDir * PullForce + Vector3.up * lift, ForceMode.Impulse);
 			}
+
+			hook.Unstick(); // disconnect hook when throwing it 
+			hook.ReturnToThrower();
 		}
 		else // have the player pull towards the object
 		{
 			puller.GetComponent<Rigidbody>().AddForce(dirToPlayer * PullForce + Vector3.up * lift, ForceMode.Impulse);
 		}
+	}
+
+	/// <summary>
+	/// if the object is in a decent motion and collides with an object with health, they take some damage.
+	/// </summary>
+	protected virtual void OnCollisionEnter(Collision collision)
+	{
+		HealthManager targetHealth = collision.gameObject.GetComponent<HealthManager>();
+		ContactPoint mainpoint = collision.GetContact(0);
+		float speed = rb.velocity.magnitude;
+
+		if (targetHealth != null)
+			Debug.Log(speed + " "+ Mathf.Min(1, speed / DamageDivisor)+ " "+ GroundCheck());
+
+		if (targetHealth != null && speed >= MinSpeedForDamage && !GroundCheck())
+		{
+			targetHealth.GetHit(Mathf.Min(1, speed / DamageDivisor), HitPoint: mainpoint.point);
+		}
+	}
+
+	bool GroundCheck()
+	{
+		float dist = GetComponent<Collider>().bounds.extents.y * 1.05f; // 1.2 times the height (starting at the midpoint)
+		if (Physics.Raycast(transform.position, Vector3.down, dist, LayerMask.GetMask("Ground")))
+			return true;
+		return false;
 	}
 }

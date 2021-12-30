@@ -175,7 +175,7 @@ public class Verlet : MonoBehaviour
 		{
 			HeldWeapon.ShootProjectile(true);
 		}
-		else if (chainState != ChainState.Away) // else the ball has been thrown, pull on tethered object
+		else if (chainState == ChainState.Stuck) // else the ball has been thrown, pull on tethered object
 		{
 			if (OnlyPullWhenTaut && !playerjoint.Taut)
 				return;
@@ -219,7 +219,6 @@ public class Verlet : MonoBehaviour
 		// show line renderer
 		chain.enabled = true;
 
-		chainState = ChainState.Thrown;
 		fundoScript.Throw(transform); // fundo itself handles the throw
 	}
 	public void Stick()

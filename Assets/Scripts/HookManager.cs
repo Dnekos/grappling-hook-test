@@ -50,10 +50,18 @@ public class HookManager : MonoBehaviour
 	public void Unstick()
 	{
 		transform.SetParent(null);
+		thrower.grabbedObj = null;
+		thrower.chainState = Verlet.ChainState.Thrown;
 
 		rb.isKinematic = false;
 		col.enabled = true;
 	}
+
+	public void ReturnToThrower()
+	{
+		thrower.ReturnToHand();
+	}
+
 	public void Throw(Transform hand)
 	{
 		Unstick();

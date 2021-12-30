@@ -36,14 +36,19 @@ public class MeleeAttack : MonoBehaviour
 		if (health)
 		{
 			if ((TargetEnemy && !health.isPlayer) || (!TargetEnemy && health.isPlayer))
-				health.GetHit(Damage, false);
+				health.GetHit(Damage, false, other.ClosestPoint(transform.position));
 			Debug.Log("did hit");
 			if (health.Health <= 0)
 				SliceObj(other);
 		}
 		else if (other.GetComponent<Sliceable>() != null)
-			SliceObj(other);
+		{
+			HookManager hook = other.GetComponentInChildren<HookManager>();
+			if (hook != null)
+				hook.Unstick(); // make sure we take off the hook if its attached (else it will be deleted)
 
+			SliceObj(other);
+		}
 	}
 
 	void SliceObj(Collider other)

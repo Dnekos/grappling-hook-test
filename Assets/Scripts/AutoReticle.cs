@@ -24,7 +24,9 @@ public class AutoReticle : MonoBehaviour
 	void Update()
 	{
 		if (enemy == null)
-		{
+		{				
+			reticle.position = center;
+
 			Ray camray = cam.ScreenPointToRay(center);
 			RaycastHit info;
 			if (Physics.Raycast(camray, out info, 20, enemyMask))
@@ -36,10 +38,7 @@ public class AutoReticle : MonoBehaviour
 		{
 			reticle.position = cam.WorldToScreenPoint(enemy.position);
 			if (Vector3.Distance(center, reticle.position) > 200)
-			{
 				enemy= null;
-				reticle.position = center;
-			}	
 		}
 	}
 }

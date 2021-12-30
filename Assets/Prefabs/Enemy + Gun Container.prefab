@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 4343536166207922799}
   - component: {fileID: 2460737668265895485}
   - component: {fileID: 4828138738781557141}
+  - component: {fileID: 9067292839082208362}
   m_Layer: 10
   m_Name: Shotgun
   m_TagString: GrabbablePoint
@@ -190,17 +191,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PullForce: 0
   lift: 3
+  DragCoefficient: 0
   Grabbed: 0
-  PullPlayer: 0
+  target: 0
   rb: {fileID: 4828138738781557141}
-  BulletDamage: 3
+  BulletDamage: 1
   PelletAmount: 5
   FireRate: 1
   spread: 5
   bulletForce: 2.5
   HeldPos: {x: 0.3, y: 0, z: 0}
   EnemyHeldPos: {x: -0.7, y: 0, z: 0}
-  clipSize: 4
+  clipSize: 20
   ThrowForce: 8
   AngularThrowForce: {x: 90, y: 0, z: 0}
   firePoint: {fileID: 130074048912417771}
@@ -222,6 +224,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9067292839082208362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828138738781557137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f097db83fe6a64d9f4d7f7d9ee050e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSolid: 1
+  _reverseWindTriangles: 0
+  _useGravity: 1
+  _shareVertices: 1
+  _smoothVertices: 1
 --- !u!1 &5414927489294103163
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +338,7 @@ GameObject:
   - component: {fileID: 5414927490057174404}
   - component: {fileID: 5414927490057174400}
   - component: {fileID: 5414927490057174401}
+  - component: {fileID: 1959306833281049805}
   m_Layer: 8
   m_Name: Enemy Collider
   m_TagString: GrabbablePoint
@@ -435,8 +455,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PullForce: 50
   lift: 20
+  DragCoefficient: 0.9
   Grabbed: 0
-  PullPlayer: 0
+  target: 0
   rb: {fileID: 0}
 --- !u!114 &5414927490057174401
 MonoBehaviour:
@@ -452,6 +473,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   Health: 1
+  BloodParticle: {fileID: 181682708672587111, guid: e686400c7d77e1c41a25671949ee454f, type: 3}
+  DeathPush: 3
+--- !u!114 &1959306833281049805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414927490057174402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f097db83fe6a64d9f4d7f7d9ee050e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSolid: 1
+  _reverseWindTriangles: 0
+  _useGravity: 1
+  _shareVertices: 1
+  _smoothVertices: 1
 --- !u!1 &5414927490083002054
 GameObject:
   m_ObjectHideFlags: 0

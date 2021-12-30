@@ -28,9 +28,11 @@ public class Gun : Grabbable
 	[Header("Enemy Specific")]
 	public Vector3 EnemyHeldPos;
 
-	[Header("Fire Speeds and clip"), SerializeField]
+	[Header("Clip"), SerializeField]
 	protected float clipSize;
-	[SerializeField, Tooltip("How far the gun is thrown")] float ThrowForce;
+
+
+	[Header("Throwing"), SerializeField, Tooltip("How far the gun is thrown")] float ThrowForce;
 	[SerializeField, Tooltip("How much the gun spins when thrown")] Vector3 AngularThrowForce;
 
 	[SerializeField, Header("Projectile Components")]
@@ -40,7 +42,7 @@ public class Gun : Grabbable
 
 	private bool canShoot = true;
 	protected float RemainingAmmo;
-	public BoxCollider col;
+	[HideInInspector]public BoxCollider col;
 
 
 	protected override void Start()
@@ -82,7 +84,15 @@ public class Gun : Grabbable
 
 		rb.AddForce(transform.forward * ThrowForce, ForceMode.Impulse);
 		rb.AddRelativeTorque(AngularThrowForce, ForceMode.Impulse);
+	}
 
+	/// <summary>
+	/// small override to prevent the player from taking damage when throwing guns, while still letting the guns deal damage to enemies
+	/// </summary>
+	protected override void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.tag != "Player")
+			base.OnCollisionEnter(collision);
 	}
 	#endregion
 

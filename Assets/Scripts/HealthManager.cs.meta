@@ -3,7 +3,8 @@ guid: 5aadf5562e7880447a72bfd48ffad9ef
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BloodParticle: {fileID: 181682708672587111, guid: e686400c7d77e1c41a25671949ee454f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

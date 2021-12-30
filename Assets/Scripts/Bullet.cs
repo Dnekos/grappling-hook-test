@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 	public float Damage;
 	[SerializeField] float Lifetime = 2;
 	float countdown;
+	[SerializeField] GameObject DustParticle;
 
 	private void Update()
 	{
@@ -21,6 +22,17 @@ public class Bullet : MonoBehaviour
 		if (collision.collider.isTrigger)
 			return;
 		Debug.Log("hit " + collision.gameObject);
+
+		HealthManager targetHealth = collision.gameObject.GetComponent<HealthManager>();
+		ContactPoint mainpoint = collision.GetContact(0);
+		if (targetHealth != null)
+		{
+			targetHealth.GetHit(Damage, HitPoint: mainpoint.point);
+		}
+		else
+		{
+			Instantiate(DustParticle, mainpoint.point + (0.2f * mainpoint.normal), Quaternion.LookRotation(mainpoint.normal));
+		}
 		Destroy(gameObject);
 	}
 }
